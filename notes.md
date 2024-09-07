@@ -296,7 +296,7 @@ Is a package for strings, mainly working for the runes. So we can handle, see an
 - space
 and such
 
-## stdlib: string
+## stdlib: strings
 
 Is a package for stings that allow us to use two strings to see different stuff like:
 - compare
