@@ -9,6 +9,7 @@ Hopefully I will finish this one in less than a month.
 Sessions:
 - 09/06/2024
 - 09/07/2024 Two in a row!!!
+- 09/08/2024 Now that I see the remaining parts of the course, I think that I might finish it in a single weekend!
 
 ## Why Golang?
 
@@ -270,6 +271,108 @@ case x > 1:
 default:
     ...
 }
+
+## Arrays
+
+They are fixed in length, and a single type for all elements, which as always start at it's default value. 
+The syntax is somewhat reverse to what we generally have in other languages:
+
+var foo [size]type
+
+We can predeclare them with an array literal, which is just defining the array elements.
+var foo [3]type = [3]{bar, bar2, bar3}
+
+Also, we can use the ... operator while making an array literal, 
+mainly if we don't want to manualy count each element of the array.
+foo := [...]{bar, bar2, bar3, bar4, ..., barN}
+
+We can iter trough an Array with the range keyword:
+
+for index, value := range arrayVar {
+    ...
+}
+
+## Slices
+
+Slices are a 'window' of an Array, but they are more flexible and clearly more usable than Arrays.
+They can change their size, mainly getting bigger or just taking a smaller part of an array.
+
+But keep in mind that if you change a element in a slice you are chaging the array that the slice 
+points to. So if we had multiple slices in a single array, and some of the elements of the slices 
+are shared between them and we change some of them, both slices and the base array are going to 
+see and get the changes.
+
+We can see the length and capacity of the slice with the functions len() and cap().
+
+You can make them from a given array with a slice operation:
+sli := arr[startI:endI]
+But keep in mind that the slice will keep the values in the indexes as the following:
+startI \<= i \< endI // Beeing i the elements and their indexes, startI and endI the passed indexes in the slice operation
+
+You can also create a slice with slice literal, just like a normal array:
+foo := []int{1, 2, 3, ..., N}
+This will create the array so the slice can point to it and will make the 
+slice the same size and capacity as the array.
+
+Now that we have the slice, we can append values to it by using the append function, passing the slice and the new value.
+If it's necesary, the capacity of the slice will be increased by double.
+
+## Maps 
+
+A implementation of hash maps in golang. They are created using the make function, simple usage since we don't define size or capacity.
+But we can also make it with map literals:
+fooMap := map[keyT]valT {
+    "key": value
+}
+
+We generally access, change, add and such to it just like a normal hashmap in almost every single implementation.
+But we have something special, when we try to access a value by usnig a key, we recieve and get 2 values.
+These are the value itself (if it exists, otherwise the default), and a boolean that indicates if a value with the given key exists.
+
+val, presence := fooMap["joe"]
+
+By using len in the map, we get the number of pairs in the map.
+
+We can iter through a map just like an array or slice with the range operator, but instead of a index we get a key:
+for key, value := range fooMap {
+    ...
+}
+
+## Struct
+
+A kind of aggregated data, mainly used in more implementation logical, usage and case stuff.
+But the useful part is grouping data that relates in the general logic, usage and cases of the program but 
+a regular map, array or any other structure would work correctly.
+
+Generally is used to define types, used like a normal c struct (without the ;), after that we can use it as a normal type
+which we would generally create with the new() function:
+type struct Foo {
+    bar type
+    bar2 type
+    bar3 type
+}
+
+var foo1 Foo = new(Foo)
+
+Also we could use the struct type as a struct literal:
+foo1 := Foo(bar: val, bar2: val, bar3: val)
+
+Each field can be accessed by using the . operator after the variable.
+
+## Make function
+
+Make is a function that help us to allocate stuff into memory, mainly structures like arrays, slices, maps and channels.
+It takes the type of the data that we need and it's size.
+
+## Make - Array / Slice
+We can pass to make the type of the slice or array, the size, and if we want a different capacity, it can be passed as well.
+Although capacity is only available for slices.
+arr = make([]int, 10)
+sli = make([]int, 10, 20)
+
+## Make - Map
+We just pass the map type with the key type in [] and new to it another [] with the value to store.
+fooMap := make(map\[keyT\]\[valT\])
 
 ## stdlib: ftm
 

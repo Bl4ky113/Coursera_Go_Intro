@@ -3,5 +3,7 @@ package main
 import "fmt"
 
 func main () {
-    fmt.Printf("%d", 2 % (10 + 0))
+    arr := [...]int{1, 2, 3}
+    sli := arr[0:2]
+    fmt.Printf("%d\t%d\n%d\t%d", len(arr), cap(arr), len(sli), cap(sli))
 }
