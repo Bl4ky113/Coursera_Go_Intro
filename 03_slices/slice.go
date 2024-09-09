@@ -8,8 +8,7 @@ import (
 )
 
 func main () {
-    usr_inputs := make([]int, 3)
-    current_input := 0
+    usr_inputs := make([]int, 0, 3)
 
     for {
         var usr_input string
@@ -20,19 +19,27 @@ func main () {
             break
         }
 
-        if num_input, err := strconv.Atoi(usr_input); err == nil {
-            if current_input < len(usr_inputs) {
-                usr_inputs[current_input] = num_input
-            } else {
-                usr_inputs = append(usr_inputs, num_input)
+        num_input, err := strconv.Atoi(usr_input)
+        if  err != nil {
+            continue
+        }
+
+        usr_inputs = append(usr_inputs, num_input)
+
+        sort.Ints(usr_inputs)
+
+        fmt.Printf("[")
+        for i, value := range usr_inputs {
+            if i != 0 {
+                fmt.Printf(", ")
             }
 
-            current_input++
+            fmt.Printf("%d", value)
         }
+        fmt.Printf("]\n")
     }
 
-    sort.Ints(usr_inputs)
-
+    fmt.Printf("Final List:\n")
     fmt.Printf("[")
     for i, value := range usr_inputs {
         if i != 0 {
