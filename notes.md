@@ -346,7 +346,7 @@ a regular map, array or any other structure would work correctly.
 
 Generally is used to define types, used like a normal c struct (without the ;), after that we can use it as a normal type
 which we would generally create with the new() function:
-type struct Foo {
+type Foo struct {
     bar type
     bar2 type
     bar3 type
@@ -364,13 +364,13 @@ Each field can be accessed by using the . operator after the variable.
 Make is a function that help us to allocate stuff into memory, mainly structures like arrays, slices, maps and channels.
 It takes the type of the data that we need and it's size.
 
-## Make - Array / Slice
+### Make - Array / Slice
 We can pass to make the type of the slice or array, the size, and if we want a different capacity, it can be passed as well.
 Although capacity is only available for slices.
 arr = make([]int, 10)
 sli = make([]int, 10, 20)
 
-## Make - Map
+### Make - Map
 We just pass the map type with the key type in [] and new to it another [] with the value to store.
 fooMap := make(map\[keyT\]\[valT\])
 
@@ -426,3 +426,58 @@ And there's
 - ParseFloat: string to float
 - FormatFloat: float to string
 
+## stdlib: net
+
+Used for mainly TPC, IP, sockets, network I/O 
+
+## stdlib: net/http
+
+Handles the http protocol package, used for making, serving and general handling of http requests
+
+## stdlib: encoding/json
+
+Just a json parser package, mainly used with structs and strings
+
+## stdlib: io/ioutils
+
+A package for io stuff, mainly file related things.
+
+For reading files you can use ReadFile and pass the path of the file.
+It'l return the WHOLE content of the file and an error if something happend.
+So reading large files is a no with this.
+
+You have the inverse of this, WriteFile which by passing the file path, content in a byte array and 
+the permission bytes we can create a file. It can't APPEND or MODIFY an already existing file.
+
+## stdlib: os
+
+Now the os libraries, packages or anything related to them in general thend to have a lot of stuff, so 
+we are going for only some stuff inside the package.
+
+### File I/O
+You can handle a file with the main funcitons Open, Close, Read and Write. But in order to get a proper use of 
+the file we need to use them at the same time.
+
+We first open the file
+f, err := os.Open("file\_path")
+
+Allocate some memory for what we want to read, although we could read the whole document
+barr := make([]byte, 32)
+
+And then read the file
+numBytes, err = f.Read(barr)
+
+Close it
+f.Close()
+
+Also we can create the file instead of opening it
+f, err := os.Create("file\_path")
+
+And then write a []byte or a string in unicode
+nb, err := f.Write(barr)
+nb, err := f.WriteString("foo")
+
+
+# Final
+
+Wow that was quite fast, but quite dense as well. I liked this course quite a lot, I sincerely expected way less content and general stuff, but Wow.
