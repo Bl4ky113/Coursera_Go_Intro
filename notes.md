@@ -355,7 +355,7 @@ type Foo struct {
 var foo1 Foo = new(Foo)
 
 Also we could use the struct type as a struct literal:
-foo1 := Foo(bar: val, bar2: val, bar3: val)
+foo1 := Foo{bar: val, bar2: val, bar3: val}
 
 Each field can be accessed by using the . operator after the variable.
 
